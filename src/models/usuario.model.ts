@@ -1,6 +1,4 @@
-import {Entity, model, property, hasMany} from '@loopback/repository';
-import {Rol} from './rol.model';
-import {UsuarioRol} from './usuario-rol.model';
+import {Entity, model, property} from '@loopback/repository';
 
 @model()
 export class Usuario extends Entity {
@@ -25,9 +23,9 @@ export class Usuario extends Entity {
 
   @property({
     type: 'string',
-    required: true,
+    required: false,
   })
-  clave: string;
+  clave?: string;
 
   @property({
     type: 'string',
@@ -40,9 +38,6 @@ export class Usuario extends Entity {
     required: true,
   })
   celular: string;
-
-  @hasMany(() => Rol, {through: {model: () => UsuarioRol, keyFrom: 'id_usuario', keyTo: 'id_rol'}})
-  usuarioRol: Rol[];
 
   constructor(data?: Partial<Usuario>) {
     super(data);
